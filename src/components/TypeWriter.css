@@ -1,0 +1,16 @@
+.typewriter {
+  color: var(--color-text-bright);
+  line-height: 1.6;
+  max-width: 800px;
+  font-family: "Source Code Pro", monospace;
+  margin: 0 auto;
+  text-align: right;
+}
+
+.typewriter p {
+  margin-bottom: 1.5rem;
+}
+
+.typewriter p:last-child {
+  margin-bottom: 0;
+}

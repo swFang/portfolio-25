@@ -1,10 +1,47 @@
 .app-container {
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Source Code Pro", monospace;
+}
+
+.name-container {
+  margin-bottom: 2rem;
+}
+
+.name-container h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ffffff;
+  margin: 0;
+  font-family: "Source Code Pro", monospace;
+}
+
+.content-container-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 400vh; /* Increased to accommodate all sections */
-  background: #1f1f1f; /* Dark grey background */
+  height: 100%;
+  justify-content: end;
+}
+
+.content-container {
+  border: 2px solid var(--color-text-muted);
+  border-radius: 4px;
+  padding: 2rem;
+  height: calc(100vh - 11rem);
+  width: 100%;
   position: relative;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar for Chrome/Safari/Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .content {

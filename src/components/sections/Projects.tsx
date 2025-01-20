@@ -1,8 +1,7 @@
 const Projects = () => {
   return (
-    <div className='tab-content'>
+    <div>
       <h2>Projects</h2>
-      {/* Placeholder content */}
     </div>
   );
 };

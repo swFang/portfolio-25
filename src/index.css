@@ -1,1 +1,27 @@
-// Delete entire file
+:root {
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* Add theme variables */
+  --color-text-muted: rgba(255, 255, 255, 0.4);
+  --color-text-bright: rgba(255, 255, 255, 1);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #1a1a1a;
+  color: #ffffff;
+}

@@ -1,156 +1,71 @@
-import { useEffect, useState } from "react";
-import { Typography, Tabs } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Row, Col } from "antd";
+import { useState, useCallback } from "react";
 import "./App.css";
-import { Cloud } from "./components/Cloud";
-import Career from "./components/Career";
-import Projects from "./components/Projects";
-import Photos from "./components/Photos";
-
-const { Title } = Typography;
+import TableOfContents from "./components/TableOfContents";
+import ContentPresenter from "./components/ContentPresenter";
+import About from "./components/sections/About";
+import Career from "./components/sections/Career";
+import Projects from "./components/sections/Projects";
+import Photography from "./components/sections/Photography";
+import Contact from "./components/sections/Contact";
 
 function App(): JSX.Element {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [activeTab, setActiveTab] = useState("");
+  const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const position = window.scrollY;
-      setScrollPosition(position);
-
-      // Update active tab based on scroll position
-      if (position < 300) {
-        setActiveTab("");
-      } else if (position < window.innerHeight) {
-        setActiveTab("career");
-      } else if (position < window.innerHeight * 2) {
-        setActiveTab("projects");
-      } else {
-        setActiveTab("photos");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+  const handleSectionSelect = useCallback((sectionId: string) => {
+    setIsTransitioning(true);
+    setSelectedSection(sectionId);
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 250);
   }, []);
 
-  const handleTabClick = (key: string) => {
-    let scrollTarget = 0;
+  const handleBack = useCallback(() => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setSelectedSection(null);
+      setIsTransitioning(false);
+    }, 250);
+  }, []);
 
-    switch (key) {
+  const renderContent = () => {
+    switch (selectedSection) {
+      case "about":
+        return <About />;
       case "career":
-        scrollTarget = 400; // Just past the initial scroll threshold
-        break;
+        return <Career />;
       case "projects":
-        scrollTarget = window.innerHeight;
-        break;
-      case "photos":
-        scrollTarget = window.innerHeight * 2;
-        break;
+        return <Projects />;
+      case "photography":
+        return <Photography />;
+      case "contact":
+        return <Contact />;
+      default:
+        return null;
     }
-
-    window.scrollTo({
-      top: scrollTarget,
-      behavior: "smooth",
-    });
   };
-
-  const cloudOpacity = Math.max(0, 1 - scrollPosition / 1000);
-  const careerOpacity = Math.min(1, Math.max(0, (scrollPosition - 300) / 500));
-
-  const items = [
-    {
-      key: "career",
-      label: "Career",
-      children: <Career />,
-    },
-    {
-      key: "projects",
-      label: "Projects",
-      children: <Projects />,
-    },
-    {
-      key: "photos",
-      label: "Photos",
-      children: <Photos />,
-    },
-  ];
 
   return (
     <div className='app-container'>
-      <header className='header'>
-        <Title className='name-title'>Daniel Fang</Title>
-        <Tabs
-          className='navigation-tabs'
-          items={items}
-          activeKey={activeTab}
-          onChange={handleTabClick}
-        />
-      </header>
-
-      <div className='content'>
-        <div className='tab-sections'>
-          <section
-            className='tab-section'
-            style={{
-              opacity: careerOpacity,
-              visibility: careerOpacity === 0 ? "hidden" : "visible",
-              pointerEvents: careerOpacity === 0 ? "none" : "auto",
-            }}
-          >
-            <Career />
-          </section>
-          <section
-            className='tab-section'
-            style={{
-              opacity: activeTab === "projects" ? 1 : 0,
-              visibility: activeTab === "projects" ? "visible" : "hidden",
-              pointerEvents: activeTab === "projects" ? "auto" : "none",
-            }}
-          >
-            <Projects />
-          </section>
-          <section
-            className='tab-section'
-            style={{
-              opacity: activeTab === "photos" ? 1 : 0,
-              visibility: activeTab === "photos" ? "visible" : "hidden",
-              pointerEvents: activeTab === "photos" ? "auto" : "none",
-            }}
-          >
-            <Photos />
-          </section>
-        </div>
-      </div>
-
-      <div className='scroll-indicator' style={{ opacity: cloudOpacity }}>
-        <DownOutlined />
-      </div>
-
-      <div className='clouds-container'>
-        <div
-          className='clouds-left'
-          style={{
-            transform: `translateX(${-scrollPosition * 2}px)`,
-            opacity: cloudOpacity,
-          }}
-        >
-          <Cloud className='cloud-1' />
-          <Cloud className='cloud-2' />
-          <Cloud className='cloud-5' />
-        </div>
-        <div
-          className='clouds-right'
-          style={{
-            transform: `translateX(${scrollPosition * 2}px)`,
-            opacity: cloudOpacity,
-          }}
-        >
-          <Cloud className='cloud-3' flipped />
-          <Cloud className='cloud-4' flipped />
-          <Cloud className='cloud-6' flipped />
+      <Row>
+        <Col span={24}>
+          <div className='name-container'>
+            <h1>Daniel</h1>
+            <h1>Fang</h1>
+          </div>
+        </Col>
+      </Row>
+      <div className='content-container'>
+        <div className='content-container-inner'>
+          {(selectedSection || isTransitioning) && (
+            <ContentPresenter onBack={handleBack}>
+              {renderContent()}
+            </ContentPresenter>
+          )}
+          {(!selectedSection || isTransitioning) && (
+            <TableOfContents onSelect={handleSectionSelect} />
+          )}
         </div>
       </div>
     </div>
