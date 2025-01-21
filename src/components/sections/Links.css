@@ -1,0 +1,35 @@
+.links-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.link-item {
+  color: var(--color-text-muted);
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: all 0.1s ease;
+  transform-origin: right;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link-item:hover {
+  color: var(--color-text-bright);
+  transform: scale(1.2);
+}
+
+/* Support for touch devices */
+@media (hover: none) {
+  .link-item:active {
+    color: var(--color-text-bright);
+    transform: scale(1.2);
+  }
+}
+
+.link-item .anticon {
+  font-size: 1rem;
+}

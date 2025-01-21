@@ -9,12 +9,15 @@ export interface Section {
 interface TableOfContentsProps {
   sections?: Section[];
   onSelect: (sectionId: string) => void;
+  selectedId?: string;
+  animate?: boolean;
+  variant?: "default" | "career";
 }
 
 const defaultSections: Section[] = [
   { id: "about", label: "About" },
   { id: "career", label: "Career" },
-  { id: "projects", label: "Projects" },
+  // { id: "projects", label: "Projects" },
   { id: "photography", label: "Photography" },
   { id: "contact", label: "Contact" },
 ];
@@ -22,19 +25,25 @@ const defaultSections: Section[] = [
 const TableOfContents = ({
   sections = defaultSections,
   onSelect,
+  selectedId,
+  animate = true,
+  variant = "default",
 }: TableOfContentsProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isExiting, setIsExiting] = useState(false);
 
   const handleSelect = useCallback(
     (sectionId: string) => {
-      setIsExiting(true);
-      // Total animation time: 0.25s (0.15s duration + 0.05s * 2 max delay)
-      setTimeout(() => {
+      if (animate) {
+        setIsExiting(true);
+        setTimeout(() => {
+          onSelect(sectionId);
+        }, 250);
+      } else {
         onSelect(sectionId);
-      }, 250);
+      }
     },
-    [onSelect]
+    [onSelect, animate]
   );
 
   return (
@@ -42,7 +51,9 @@ const TableOfContents = ({
       {sections.map((section, index) => (
         <div
           key={section.id}
-          className={`toc-item ${hoveredIndex === index ? "hovered" : ""}`}
+          className={`toc-item ${hoveredIndex === index ? "hovered" : ""} ${
+            section.id === selectedId ? "selected" : ""
+          } ${variant === "career" ? "career-item" : ""}`}
           onMouseEnter={() => setHoveredIndex(index)}
           onMouseLeave={() => setHoveredIndex(null)}
           onClick={() => handleSelect(section.id)}

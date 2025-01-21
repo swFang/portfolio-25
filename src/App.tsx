@@ -8,6 +8,7 @@ import Career from "./components/sections/Career";
 import Projects from "./components/sections/Projects";
 import Photography from "./components/sections/Photography";
 import Contact from "./components/sections/Contact";
+import Footer from "./components/Footer";
 
 function App(): JSX.Element {
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
@@ -68,6 +69,7 @@ function App(): JSX.Element {
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

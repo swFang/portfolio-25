@@ -1,4 +1,4 @@
-import { ABOUT_DESCRIPTION } from "../../constants/about";
+import { ABOUT_DESCRIPTION } from "../../constants/descriptions";
 import TypeWriter from "../TypeWriter";
 import "./About.css";
 

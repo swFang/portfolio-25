@@ -1,0 +1,21 @@
+.navigation-tabs .ant-tabs-tab:hover {
+  color: #ffffff !important;
+}
+
+/* Support for touch devices */
+@media (hover: none) {
+  .navigation-tabs .ant-tabs-tab:active {
+    color: #ffffff !important;
+  }
+}
+
+/* Cloud hover effects */
+.cloud:hover {
+  transform: translateY(-20px) scaleX(var(--flip, 1));
+}
+
+@media (hover: none) {
+  .cloud:active {
+    transform: translateY(-20px) scaleX(var(--flip, 1));
+  }
+}

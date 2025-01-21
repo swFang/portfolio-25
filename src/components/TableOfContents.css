@@ -15,9 +15,32 @@
   font-family: "Source Code Pro", monospace;
 }
 
-.toc-item.hovered {
+/* Add smaller text size for career items */
+.toc-item.career-item {
+  font-size: 1rem;
+}
+
+.toc-item.hovered,
+.toc-item:hover {
   color: var(--color-text-bright);
-  transform: scale(1.4);
+  transform: scale(1.2);
+}
+
+.toc-item.selected {
+  color: var(--color-text-bright);
+  transform: scale(1.2);
+}
+
+.toc-item.selected:hover {
+  transform: scale(1.2);
+}
+
+/* Support for touch devices */
+@media (hover: none) {
+  .toc-item:active {
+    color: var(--color-text-bright);
+    transform: scale(1.2);
+  }
 }
 
 .table-of-contents.exiting {

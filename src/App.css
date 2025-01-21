@@ -28,7 +28,7 @@
   border: 2px solid var(--color-text-muted);
   border-radius: 4px;
   padding: 2rem;
-  height: calc(100vh - 11rem);
+  height: calc(100vh - 13rem);
   width: 100%;
   position: relative;
   overflow-y: auto;

@@ -1,0 +1,30 @@
+.career-details {
+  color: var(--color-text-bright);
+  font-family: "Source Code Pro", monospace;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.career-details ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.career-details li {
+  margin-bottom: 0.5rem;
+  transition: transform 0.1s ease;
+  transform-origin: right;
+}
+
+.career-details li:hover {
+  transform: scale(1.2);
+}
+
+/* Support for touch devices */
+@media (hover: none) {
+  .career-details li:active {
+    transform: scale(1.2);
+  }
+}
