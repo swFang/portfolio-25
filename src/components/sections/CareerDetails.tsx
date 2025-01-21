@@ -1,4 +1,5 @@
 import { CAREER_DESCRIPTIONS } from "../../constants/descriptions";
+import TypeWriter from "../TypeWriter";
 import "./CareerDetails.css";
 
 interface CareerDetailsProps {
@@ -19,7 +20,13 @@ const CareerDetails = ({ roleId }: CareerDetailsProps) => {
     <div className='career-details'>
       <ul>
         {details.map((point: string, index: number) => (
-          <li key={index}>{point}</li>
+          <li key={index}>
+            <TypeWriter
+              text={point}
+              speed={0.5}
+              delay={index * 0.2} // Stagger the start of each line
+            />
+          </li>
         ))}
       </ul>
     </div>

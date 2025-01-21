@@ -1,5 +1,6 @@
 .content-presenter {
-  height: calc(100vh - 14rem);
+  height: calc(100vh - 15rem);
+  padding-top: 1rem;
   width: 100%;
   animation: slideIn 0.25s ease forwards;
   display: flex;
