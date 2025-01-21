@@ -19,12 +19,17 @@
 }
 
 .career-details li:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 /* Support for touch devices */
 @media (hover: none) {
   .career-details li:active {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
+}
+
+.career-details .typewriter {
+  text-align: right;
+  margin: 0;
 }
