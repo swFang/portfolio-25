@@ -10,7 +10,7 @@ const careerSections = [
 ];
 
 const Career = () => {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [selectedRole, setSelectedRole] = useState<string | undefined>();
 
   const handleSelect = (roleId: string) => {
     setSelectedRole(roleId);
