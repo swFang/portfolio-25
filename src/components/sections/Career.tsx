@@ -1,19 +1,17 @@
-import { useState } from "react";
 import TableOfContents from "../TableOfContents";
 import CareerDetails from "./CareerDetails";
+import { CAREER_SECTIONS } from "../../constants/navigation";
+import type { CareerSectionId } from "../../constants/navigation";
 import "./Career.css";
 
-const careerSections = [
-  { id: "arista", label: "Arista Networks" },
-  { id: "arista-intern", label: "Arista Networks - Intern" },
-  { id: "sap-intern", label: "SAP - Intern" },
-];
+interface CareerProps {
+  selectedRole?: CareerSectionId;
+  onRoleSelect: (roleId: CareerSectionId) => void;
+}
 
-const Career = () => {
-  const [selectedRole, setSelectedRole] = useState<string | undefined>();
-
+const Career = ({ selectedRole, onRoleSelect }: CareerProps) => {
   const handleSelect = (roleId: string) => {
-    setSelectedRole(roleId);
+    onRoleSelect(roleId as CareerSectionId);
   };
 
   return (
@@ -26,7 +24,7 @@ const Career = () => {
         }}
       >
         <TableOfContents
-          sections={careerSections}
+          sections={CAREER_SECTIONS.map(({ id, label }) => ({ id, label }))}
           onSelect={handleSelect}
           selectedId={selectedRole}
           animate={false}

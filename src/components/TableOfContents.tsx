@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { MAIN_SECTIONS } from "../constants/navigation";
 import "./TableOfContents.css";
 
 export interface Section {
@@ -14,13 +15,10 @@ interface TableOfContentsProps {
   variant?: "default" | "career";
 }
 
-const defaultSections: Section[] = [
-  { id: "about", label: "About" },
-  { id: "career", label: "Career" },
-  // { id: "projects", label: "Projects" },
-  { id: "photography", label: "Photography" },
-  { id: "contact", label: "Contact" },
-];
+const defaultSections: Section[] = MAIN_SECTIONS.map(({ id, label }) => ({
+  id,
+  label,
+}));
 
 const TableOfContents = ({
   sections = defaultSections,
